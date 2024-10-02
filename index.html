@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profit/Loss Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+            background-color: #1c1c1c; /* Dark background */
+            color: #e0e0e0; /* Light text color */
+        }
+
+        h2 {
+            color: #ffffff; /* White color for heading */
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: #2c2c2c; /* Darker background for the container */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .header {
+            display: flex;
+            align-items: center; /* Center vertically */
+            margin-bottom: 20px;
+            justify-content: center; /* Center horizontally */
+        }
+
+        .logo {
+            max-width: 50px; /* Set the size of the logo */
+            height: auto; /* Maintain aspect ratio */
+            margin-right: 10px; /* Space between logo and text */
+        }
+
+        .company-name {
+            font-size: 24px; /* Adjust font size */
+            font-weight: bold;
+            color: #ffffff; /* White color for company name */
+        }
+
+        label {
+            display: block;
+            margin: 15px 0 5px; /* More margin for better spacing */
+            font-weight: bold;
+            color: #ffffff; /* White color for labels */
+        }
+
+        input[type="number"] {
+            width: calc(100% - 22px); /* Full width minus padding and border */
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #444; /* Darker border */
+            border-radius: 4px;
+            background-color: #3c3c3c; /* Dark background for input */
+            color: #e0e0e0; /* Light text color */
+            box-sizing: border-box; /* Include padding and border in width calculation */
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #28a745; /* Green button */
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px; /* Rounded corners for button */
+        }
+
+        button:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        .result span {
+            font-weight: bold;
+        }
+
+        .credits {
+            margin-top: 30px;
+            text-align: center; /* Center the credits text */
+            font-size: 14px; /* Smaller font size for credits */
+            color: #cccccc; /* Lighter color for credits */
+        }
+
+        .credits a {
+            color: #28a745; /* Green color for link */
+            text-decoration: none; /* Remove underline */
+        }
+
+        .credits a:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header with Logo and Company Name -->
+        <div class="header">
+            <img src="https://i.ibb.co/cL7RDqG/b5d8add32b2d.jpg" alt="Logo" class="logo">
+            <div class="company-name">Cygnus Delta</div>
+        </div>
+
+        <h2>Profit/Loss Calculator</h2>
+        <form id="calculatorForm">
+            <label for="pixelsValue">Pixels Value in PHP:</label>
+            <input type="number" id="pixelsValue" step="0.01" required>
+
+            <label for="pixelsEarned">Pixels Earned:</label>
+            <input type="number" id="pixelsEarned" required>
+
+            <label for="coinsSpent">Coins Spent:</label>
+            <input type="number" id="coinsSpent" required>
+
+            <label for="currentPrice">Current Price OTC Coins (PHP per 1 Million):</label>
+            <input type="number" id="currentPrice" step="0.01" required>
+
+            <button type="button" onclick="calculateProfitLoss()">Calculate</button>
+        </form>
+
+        <div class="result" id="resultDisplay"></div>
+
+        <!-- Credits Section -->
+        <div class="credits">
+            <p>© 2024 Cygnus Delta. All rights reserved.</p>
+            <p>Created by <a href="https://www.facebook.com/JoedemarRosero.1710/" target="_blank">Joedemar Rosero</a> on <a href="https://www.facebook.com/JoedemarRosero.1710/" target="_blank">Facebook</a></p>
+        </div>
+    </div>
+
+    <script>
+        function calculateProfitLoss() {
+            // Get input values
+            const pixelsValue = parseFloat(document.getElementById('pixelsValue').value);
+            const pixelsEarned = parseFloat(document.getElementById('pixelsEarned').value);
+            const coinsSpent = parseFloat(document.getElementById('coinsSpent').value);
+            const currentPrice = parseFloat(document.getElementById('currentPrice').value);
+
+            // Calculate Total Earned Pixels
+            const totalEarnedPixels = pixelsValue * pixelsEarned;
+
+            // Calculate Total Coins Value based on price per 1 million coins
+            const totalCoinsValue = parseFloat((coinsSpent * (currentPrice / 1000000)).toFixed(2));
+
+            // Calculate Profit/Loss
+            const profitLoss = totalEarnedPixels - totalCoinsValue;
+
+            // Calculate Coins per Pixel (Rounded to nearest integer, no decimals)
+            const coinsPerPixel = coinsSpent !== 0 ? Math.round(coinsSpent / pixelsEarned) : 'N/A';
+
+            // Format coinsPerPixel with comma separators
+            const formattedCPP = coinsPerPixel !== 'N/A' ? coinsPerPixel.toLocaleString() : 'N/A';
+
+            // Display the result
+            const resultDisplay = document.getElementById('resultDisplay');
+            resultDisplay.innerHTML = `
+                <p><span>Total Earned Pixels (PHP):</span> ${totalEarnedPixels.toFixed(2)}</p>
+                <p><span>Total Coins Value (PHP):</span> ${totalCoinsValue.toFixed(2)}</p>
+                <p><span>Profit/Loss (PHP):</span> ${profitLoss.toFixed(2)}</p>
+                <p><span>Coins per Pixel (CPP):</span> ${formattedCPP}</p>
+            `;
+        }
+    </script>
+</body>
+</html>
