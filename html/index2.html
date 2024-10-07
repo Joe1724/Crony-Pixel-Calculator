@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profit/Loss Calculator Mobile</title>
+    <!-- Link to the corresponding CSS file in the css folder -->
+    <link rel="stylesheet" href="../css/style2.css">
+</head>
+<body>
+    <div class="container">
+        
+
+        <!-- Header with Logo and Company Name -->
+        <div class="header">
+            <img src="https://i.ibb.co/cL7RDqG/b5d8add32b2d.jpg" alt="Logo" class="logo">
+            <div class="company-name">Cygnus Delta</div>
+        </div>
+
+        <h2>Profit/Loss Calculator (Mobile Version)</h2>
+        <form id="calculatorForm">
+            <label for="pixelsValue">Pixels Value in PHP:</label>
+            <input type="number" id="pixelsValue" step="0.01" required>
+
+            <label for="pixelsEarned">Pixels Earned:</label>
+            <input type="number" id="pixelsEarned" required>
+
+            <label for="coinsSpent">Coins Spent:</label>
+            <input type="number" id="coinsSpent" required>
+
+            <label for="currentPrice">Current Price OTC Coins (PHP per 1 Million):</label>
+            <input type="number" id="currentPrice" step="0.01" required>
+
+            <!-- Scholar Selection -->
+            <label>Are you a Scholar?</label>
+            <input type="radio" name="scholar" value="yes" onclick="toggleScholar(true)"> Yes
+            <input type="radio" name="scholar" value="no" onclick="toggleScholar(false)" checked> No
+
+            <!-- Percentage Split -->
+            <div id="percentageSplit" class="hidden">
+                <label for="splitPercentage">Percentage Split (Manager/Scholar):</label>
+                <select id="splitPercentage">
+                    <option value="70/30">70% Manager / 30% Scholar</option>
+                    <option value="60/40">60% Manager / 40% Scholar</option>
+                    <option value="50/50">50% Manager / 50% Scholar</option>
+                    <option value="30/70">30% Manager / 70% Scholar</option>
+                </select>
+            </div>
+
+            <button type="button" onclick="calculateProfitLoss()">Calculate</button>
+        </form>
+
+        <div class="result" id="resultDisplay"></div>
+        <button style="margin-top: 20px; background-color: #dc3545;" onclick="goBack()">Back</button>
+
+        <!-- Credits Section -->
+        <div class="credits">
+            <p>© 2024 Cygnus Delta. All rights reserved.</p>
+            <p>Created by <a href="https://www.facebook.com/JoedemarRosero.1710/" target="_blank">Joedemar Rosero</a> on <a href="https://www.facebook.com/JoedemarRosero.1710/" target="_blank">Facebook</a></p>
+        </div>
+    </div>
+
+    <!-- Link to the corresponding JavaScript file in the javascript folder -->
+    <script src="../javascript/script2.js"></script>
+</body>
+</html>
